@@ -1,5 +1,19 @@
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const NavBar = () => {
+
+    const { user, logOut } = useAuth();
+
+    const navLinks = <div className=" flex flex-col lg:flex-row gap-5 text-xl font-Source">
+        <NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/'}><li className="hover:text-third">Home</li></NavLink>
+        <NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/available_foods'}><li className="hover:text-third">Available Foods</li></NavLink>
+        {<NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/add_food'}><li className="hover:text-third">Add Food</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/manage_my_foods'}><li className="hover:text-third">Manage My Foods</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={"/my_food_requests"}><li className="hover:text-third"> My Food Request</li></NavLink>}
+    </div>
+
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -8,38 +22,40 @@ const NavBar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">Aura NEWS</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
+                    {navLinks}
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
-            </div>
-        </div>
+                {
+                    user ?
+
+                        <div className="flex items-center gap-3 mr-10">
+                            <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
+                                <div tabIndex={0} role="button" className="w-12 rounded-full">
+                                    <img className="rounded-full" alt="user" src={user && user?.photoURL || "https://i.postimg.cc/TYTdGph6/man.png"} />
+                                </div>
+                                <ul tabIndex={0} className="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li className="mb-3">{user?.displayName}</li>
+                                    <Link onClick={logOut} className="btn bg-third">Logout</Link>
+                                </ul>
+                            </div>
+                        </div>
+                        :
+
+                        <div>
+                            <Link to={'/login'} className="btn bg-red-700 mr-3 text-white">Login</Link>
+                            <Link to={'/registration'} className="btn bg-red-700 text-white">Sign Up</Link>
+                        </div>
+                }
+            </div >
+        </div >
     );
 };
 
