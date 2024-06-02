@@ -6,11 +6,13 @@ const NavBar = () => {
     const { user, logOut } = useAuth();
 
     const navLinks = <div className=" flex flex-col lg:flex-row gap-5 text-xl font-Source">
-        <NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/'}><li className="hover:text-third">Home</li></NavLink>
-        <NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/available_foods'}><li className="hover:text-third">Available Foods</li></NavLink>
-        {<NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/add_food'}><li className="hover:text-third">Add Food</li></NavLink>}
-        {<NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={'/manage_my_foods'}><li className="hover:text-third">Manage My Foods</li></NavLink>}
-        {<NavLink className={({ isActive }) => isActive ? 'text-third' : ''} to={"/my_food_requests"}><li className="hover:text-third"> My Food Request</li></NavLink>}
+        <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/'}><li className="hover:text-red-700">Home</li></NavLink>
+        <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_article'}><li className="hover:text-red-700">Add Articles</li></NavLink>
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_food'}><li className="hover:text-red-700">All Articles</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/manage_my_foods'}><li className="hover:text-red-700">Subscription</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_food_requests"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_food_requests"}><li className="hover:text-red-700">My Articles</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_food_requests"}><li className="hover:text-red-700">Premium Articles</li></NavLink>}
     </div>
 
 
