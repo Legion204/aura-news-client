@@ -38,6 +38,15 @@ const AddArticle = () => {
 
         if (res.data.success) {
             // send data to server
+
+            const date = new Date();
+
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // The month index starts from 0
+            const year = date.getFullYear();
+
+            let currentDate = `${day}/${month}/${year}`;
+
             const article = {
                 articleTitle: data.article_title,
                 articleImg: res.data.data.display_url,
@@ -48,11 +57,12 @@ const AddArticle = () => {
                 authorEmail: user?.email,
                 status: 'pending',
                 isPremium: false,
+                publishDate: currentDate,
                 articleView: 0
 
             }
 
-            const articleRes = await axiosPublic.post('/news', article)
+            const articleRes = await axiosPublic.post("/articles", article)
 
             if (articleRes.data.insertedId) {
                 Swal.fire({

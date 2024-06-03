@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const Login = () => {
+
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate()
 
     const { signInGoogle, signIn } = useAuth();
 
@@ -29,9 +33,16 @@ const Login = () => {
 
     const handleGoogleLogin = () => {
         signInGoogle()
-            .then(() => {
-                toast.success("login successfully")
-                reset()
+            .then((result) => {
+                const userInfo = {
+                    name: result.user?.displayName,
+                    email: result.user?.email
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(() => {
+                        toast.success("login successfully")
+                        navigate('/')
+                    })
             })
             .catch(() => {
                 toast.error("Invalid credentials")
@@ -75,7 +86,7 @@ const Login = () => {
                         </button>
                     </div>
                     <p className="text-xs text-center sm:px-6 dark:text-gray-600 text-white">Do not have an account?
-                        <Link to={"/registration"}  className="underline text-red-700">Sing up</Link>
+                        <Link to={"/registration"} className="underline text-red-700">Sing up</Link>
                     </p>
                 </div>
             </div>
