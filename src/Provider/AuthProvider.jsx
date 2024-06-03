@@ -8,7 +8,7 @@ const auth = getAuth(app);
 
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [firebaseUser, setFirebaseUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
 
@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
+            setFirebaseUser(currentUser);
             console.log(currentUser);
             setLoading(false);
         });
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    const data = { user, loading, auth, createUser, signIn, signInGoogle, logOut }
+    const data = { firebaseUser, loading, auth, createUser, signIn, signInGoogle, logOut }
     return (
         <AuthContext.Provider value={data}>
             {children}

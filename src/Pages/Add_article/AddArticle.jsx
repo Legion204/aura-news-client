@@ -3,6 +3,7 @@ import Select from "react-select";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 
 const image_hosting_key = import.meta.env.VITE_image_hosting_key
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -78,8 +79,8 @@ const AddArticle = () => {
 
     return (
         <div className=" p-10 lg:p-32 w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-white/50 p-4 md:p-8 xl:p-20 rounded-3xl">
-                <h1 className="text-center font-semibold text-5xl text-third mb-6 font-Poetsen">Add Article</h1>
+            <SectionTitle heading={"Add Article"}></SectionTitle>
+            <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-white/50 p-4 md:p-8 xl:px-20 rounded-3xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-5 m">
 
                     <label className="form-control w-full ">

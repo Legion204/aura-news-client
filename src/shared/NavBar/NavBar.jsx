@@ -3,12 +3,12 @@ import useAuth from "../../Hooks/useAuth";
 
 const NavBar = () => {
 
-    const { user, logOut } = useAuth();
+    const { firebaseUser, logOut } = useAuth();
 
     const navLinks = <div className=" flex flex-col lg:flex-row gap-5 text-xl font-Source">
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/'}><li className="hover:text-red-700">Home</li></NavLink>
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_article'}><li className="hover:text-red-700">Add Articles</li></NavLink>
-        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_food'}><li className="hover:text-red-700">All Articles</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/all_articles"}><li className="hover:text-red-700">All Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/manage_my_foods'}><li className="hover:text-red-700">Subscription</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_food_requests"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_food_requests"}><li className="hover:text-red-700">My Articles</li></NavLink>}
@@ -36,15 +36,15 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    user ?
+                    firebaseUser ?
 
                         <div className="flex items-center gap-3 mr-10">
                             <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
                                 <div tabIndex={0} role="button" className="w-12 rounded-full">
-                                    <img className="rounded-full" alt="user" src={user && user?.photoURL || "https://i.postimg.cc/TYTdGph6/man.png"} />
+                                    <img className="rounded-full" alt="user" src={firebaseUser && firebaseUser?.photoURL || "https://i.postimg.cc/TYTdGph6/man.png"} />
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li className="mb-3">{user?.displayName}</li>
+                                    <li className="mb-3">{firebaseUser?.displayName}</li>
                                     <Link onClick={logOut} className="btn bg-third">Logout</Link>
                                 </ul>
                             </div>
