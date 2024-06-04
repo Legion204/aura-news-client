@@ -7,6 +7,7 @@ import AddArticle from "../Pages/Add_article/AddArticle";
 import AllArticles from "../Pages/All_article/AllArticles";
 import ArticleDetails from "../Pages/Article_details/ArticleDetails";
 import PremiumArticle from "../Pages/Pemium_articles/PremiumArticle";
+import MyArticles from "../Pages/My_articles/MyArticles";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         {
           path:"/premium_articles",
           element:<PremiumArticle></PremiumArticle>
+        },
+        {
+          path:"/my_articles",
+          element:<MyArticles></MyArticles>
         }
       ]
     },

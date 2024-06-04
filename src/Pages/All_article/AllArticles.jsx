@@ -14,7 +14,7 @@ const AllArticles = () => {
             const res = await axiosPublic.get("/articles")
             return res.data
         }
-    })
+    });
 
     return (
         <div>
