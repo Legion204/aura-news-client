@@ -10,7 +10,7 @@ const ArticleDetails = () => {
     const { id } = useParams()
 
     const { data: article = {} } = useQuery({
-        queryKey: ['articles'],
+        queryKey: ['article'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/article/${id}`)
             return res.data

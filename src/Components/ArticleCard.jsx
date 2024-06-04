@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import PropTypes from 'prop-types';
 
 const ArticleCard = ({ article }) => {
     return (
@@ -19,5 +19,9 @@ const ArticleCard = ({ article }) => {
         </article>
     );
 };
+
+ArticleCard.propTypes={
+    article:PropTypes.object
+}
 
 export default ArticleCard;

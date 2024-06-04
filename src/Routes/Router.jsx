@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import AddArticle from "../Pages/Add_article/AddArticle";
 import AllArticles from "../Pages/All_article/AllArticles";
 import ArticleDetails from "../Pages/Article_details/ArticleDetails";
+import PremiumArticle from "../Pages/Pemium_articles/PremiumArticle";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         {
           path:"/article/:id",
           element:<ArticleDetails></ArticleDetails>
+        },
+        {
+          path:"/premium_articles",
+          element:<PremiumArticle></PremiumArticle>
         }
       ]
     },

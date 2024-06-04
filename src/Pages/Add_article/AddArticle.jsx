@@ -11,7 +11,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddArticle = () => {
 
     const axiosPublic = useAxiosPublic();
-    const { user } = useAuth();
+    const { firebaseUser } = useAuth();
 
     const options = [
         { value: 'sport', label: 'sport' },
@@ -54,8 +54,8 @@ const AddArticle = () => {
                 articleTags: data.tags.map(tag => tag.value),
                 details: data.details,
                 publication: data.publication,
-                author: user?.displayName,
-                authorEmail: user?.email,
+                author: firebaseUser?.displayName,
+                authorEmail: firebaseUser?.email,
                 status: 'pending',
                 isPremium: false,
                 publishDate: currentDate,
