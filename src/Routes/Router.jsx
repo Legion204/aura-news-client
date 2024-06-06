@@ -8,6 +8,7 @@ import AllArticles from "../Pages/All_article/AllArticles";
 import ArticleDetails from "../Pages/Article_details/ArticleDetails";
 import PremiumArticle from "../Pages/Pemium_articles/PremiumArticle";
 import MyArticles from "../Pages/My_articles/MyArticles";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -28,23 +29,23 @@ const router = createBrowserRouter([
         },
         {
           path:"/add_article",
-          element:<AddArticle></AddArticle>
+          element:<PrivateRoute><AddArticle></AddArticle></PrivateRoute>
         },
         {
           path:"/all_articles",
-          element:<AllArticles></AllArticles>
+          element:<PrivateRoute><AllArticles></AllArticles></PrivateRoute>
         },
         {
           path:"/article/:id",
-          element:<ArticleDetails></ArticleDetails>
+          element:<PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>
         },
         {
           path:"/premium_articles",
-          element:<PremiumArticle></PremiumArticle>
+          element:<PrivateRoute><PremiumArticle></PremiumArticle></PrivateRoute>
         },
         {
           path:"/my_articles",
-          element:<MyArticles></MyArticles>
+          element:<PrivateRoute><MyArticles></MyArticles></PrivateRoute>
         }
       ]
     },

@@ -4,10 +4,13 @@ import useAuth from "../../Hooks/useAuth";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MyArticles = () => {
     const { firebaseUser } = useAuth();
     const axiosPublic = useAxiosPublic();
+    const [articleData, setArticleData] = useState({});
 
     const { data: myArticles = [], refetch } = useQuery({
         queryKey: ['myArticles'],
@@ -34,13 +37,40 @@ const MyArticles = () => {
                             refetch()
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Your article has been deleted.",
                                 icon: "success"
                             });
                         }
                     })
             }
         });
+    };
+
+
+    // get food data from table
+    const getArticleData = (id) => {
+        const data = myArticles.find(myArticle => myArticle._id === id);
+        setArticleData(data);
+    };
+
+    const handleUpdate = e => {
+        e.preventDefault()
+        const form = e.target;
+        const articleTitle = form.article_title.value
+        const details = form.details.value
+        const updatedArticle = { articleTitle, details }
+
+        axiosPublic.put(`/update_article/${articleData?._id}`, updatedArticle)
+            .then(data => {
+                if (data.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        title: "Article updated successfully!",
+                        icon: "success"
+                    });
+                }
+            })
+
     }
 
     return (
@@ -67,10 +97,10 @@ const MyArticles = () => {
                                 myArticles?.map((myArticle, index) => <tr key={myArticle?._id}>
                                     <th>{index + 1}</th>
                                     <td>{myArticle?.articleTitle}</td>
-                                    <td><button className="btn bg-red-700 text-white">Details</button></td>
+                                    <td><Link to={`/article/${myArticle?._id}`} className="btn btn-ghost text-white bg-red-700 justify-self-end">Details</Link></td>
                                     <td>{myArticle?.status}</td>
                                     <td>{myArticle?.isPremium && "Yes" || "No"}</td>
-                                    <td><button className="btn text-2xl bg-red-700 text-white"><MdEdit /></button></td>
+                                    <td><button onClick={() => { getArticleData(myArticle?._id), document.getElementById('my_modal_3').showModal() }} className="btn text-2xl bg-red-700 text-white"><MdEdit /></button></td>
                                     <td><button onClick={() => { handleDelete(myArticle?._id) }} className="btn text-2xl bg-red-700 text-white"><MdDelete /></button></td>
                                 </tr>)
                             }
@@ -78,6 +108,30 @@ const MyArticles = () => {
                     </table>
                 </div>
             </div>
+            {/* Modal */}
+            <dialog id="my_modal_3" className="modal w-full">
+                <div className="modal-box w-full max-w-[80%]">
+                    <button onClick={() => { document.getElementById('my_modal_3').close() }} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    <form method="dialog" onSubmit={handleUpdate} className="w-full bg-white/50 p-4 md:p-8 xl:px-20 rounded-3xl">
+                        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-5 m">
+
+                            <label className="form-control w-full ">
+                                <div className="label">
+                                    <span className="label-text text-third">Article Title</span>
+                                </div>
+                                <input type="text" placeholder="Article Title" name="article_title" defaultValue={articleData?.articleTitle} className="input input-bordered w-full " />
+                            </label>
+                            <label className="form-control w-full ">
+                                <div className="label">
+                                    <span className="label-text text-third">Details</span>
+                                </div>
+                                <input type="text" placeholder="Details" name="details" className="input input-bordered w-full " defaultValue={articleData?.details} />
+                            </label>
+                        </div>
+                        <button onClick={() => { document.getElementById('my_modal_3').close() }} type="submit" className="btn w-full bg-red-700 border-none text-white mt-8">Add</button>
+                    </form>
+                </div>
+            </dialog>
         </div>
     );
 };
