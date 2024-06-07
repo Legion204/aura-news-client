@@ -10,7 +10,7 @@ const NavBar = () => {
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_article'}><li className="hover:text-red-700">Add Articles</li></NavLink>
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/all_articles"}><li className="hover:text-red-700">All Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/manage_my_foods'}><li className="hover:text-red-700">Subscription</li></NavLink>}
-        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_food_requests"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
+        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/dashboard/users"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_articles"}><li className="hover:text-red-700">My Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/premium_articles"}><li className="hover:text-red-700">Premium Articles</li></NavLink>}
     </div>

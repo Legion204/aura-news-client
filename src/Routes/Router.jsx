@@ -9,6 +9,10 @@ import ArticleDetails from "../Pages/Article_details/ArticleDetails";
 import PremiumArticle from "../Pages/Pemium_articles/PremiumArticle";
 import MyArticles from "../Pages/My_articles/MyArticles";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import Users from "../Pages/Dashboard/Users/Users";
+import AllArticlesList from "../Pages/Dashboard/All_articles/AllArticlesList";
+import AddPublications from "../Pages/Dashboard/Add_publications/AddPublications";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +53,24 @@ const router = createBrowserRouter([
         }
       ]
     },
+    {
+      path:"dashboard",
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path:"users",
+          element:<Users></Users>
+        },
+        {
+          path:"all_articles",
+          element:<AllArticlesList></AllArticlesList>
+        },
+        {
+          path:"add_publications",
+          element:<AddPublications></AddPublications>
+        }
+      ]
+    }
   ]);
 
   export default router;
