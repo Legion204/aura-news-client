@@ -14,7 +14,7 @@ const PremiumArticle = () => {
             const res = await axiosPublic.get("/premium_articles")
             return res.data
         }
-    })
+    });
 
     return (
         <div>

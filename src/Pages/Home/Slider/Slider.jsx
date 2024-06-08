@@ -41,7 +41,7 @@ const Slider = () => {
                 className="mySwiper"
             >
                 {
-                    trArticles?.map(trArticle => <SwiperSlide key={trArticle?._id}>
+                    trArticles?.slice(0,4).map(trArticle => <SwiperSlide key={trArticle?._id}>
                         <div className="relative">
                             <div className="absolute flex flex-col items-start justify-center h-full lg:w-[60%] z-10">
                                 <div className='space-y-5 m-20'>
