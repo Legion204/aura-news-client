@@ -15,7 +15,7 @@ const ArticleDetails = () => {
             const res = await axiosPublic.get(`/article/${id}`)
             return res.data
         }
-    })
+    });
 
     return (
         <div className="">
