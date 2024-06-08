@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
     if (firebaseUser) {
         return children;
     }
-    return <Navigate to="/login" state={{from: location}} replace></Navigate>
+    return <Navigate state={location.pathname} to={"/login"}></Navigate>
 };
 
 PrivateRoute.propTypes={

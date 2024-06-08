@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
@@ -9,8 +9,9 @@ const Login = () => {
 
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate()
-
     const { signInGoogle, signIn } = useAuth();
+    const location = useLocation();
+
 
     const {
         register,
@@ -22,6 +23,7 @@ const Login = () => {
     const onSubmit = (data) => {
         signIn(data.email, data.password)
             .then(() => {
+                navigate(location?.state ? location.state : "/");
                 toast.success("login successfully")
                 reset()
             })
@@ -41,8 +43,8 @@ const Login = () => {
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(() => {
+                        navigate(location?.state ? location.state : "/");
                         toast.success("login successfully")
-                        navigate('/')
                     })
             })
             .catch(() => {

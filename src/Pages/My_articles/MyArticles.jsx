@@ -5,7 +5,7 @@ import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import DetailsBtn from "../../Components/DetailsBtn";
 
 const MyArticles = () => {
     const { firebaseUser } = useAuth();
@@ -97,7 +97,7 @@ const MyArticles = () => {
                                 myArticles?.map((myArticle, index) => <tr key={myArticle?._id}>
                                     <th>{index + 1}</th>
                                     <td>{myArticle?.articleTitle}</td>
-                                    <td><Link to={`/article/${myArticle?._id}`} className="btn btn-ghost text-white bg-red-700 justify-self-end">Details</Link></td>
+                                    <td><DetailsBtn id={myArticle?._id}></DetailsBtn></td>
                                     <td>{myArticle?.status}</td>
                                     <td>{myArticle?.isPremium && "Yes" || "No"}</td>
                                     <td><button onClick={() => { getArticleData(myArticle?._id), document.getElementById('my_modal_3').showModal() }} className="btn text-2xl bg-red-700 text-white"><MdEdit /></button></td>

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import DetailsBtn from "./DetailsBtn";
 
 const ArticleCard = ({ article }) => {
     return (
@@ -14,7 +14,7 @@ const ArticleCard = ({ article }) => {
                     <span>{article?.publishDate}</span>
                     <span>{article?.articleView} views</span>
                 </div>
-                <Link to={`/article/${article?._id}`} className="btn btn-ghost text-white bg-red-700 mt-5 w-28 justify-self-end">See details</Link>
+                <DetailsBtn id={article?._id}></DetailsBtn>
             </div>
         </article>
     );

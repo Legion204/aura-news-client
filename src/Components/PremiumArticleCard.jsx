@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import DetailsBtn from './DetailsBtn';
 
 const PremiumArticleCard = ({premiumArticle}) => {
     return (
@@ -10,7 +10,7 @@ const PremiumArticleCard = ({premiumArticle}) => {
                 <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">{premiumArticle?.articleTitle}</h3>
                 <span className="text-xs dark:text-gray-600">{premiumArticle?.publishDate}</span>
                 <p>{premiumArticle?.details.slice(0,100)+ '...'}</p>
-                <Link to={`/article/${premiumArticle?._id}`} className="btn btn-ghost text-white bg-red-700 mt-5 w-28 justify-self-end">See details</Link>
+                <DetailsBtn id={premiumArticle?._id}></DetailsBtn>
             </div>
         </div>
 
