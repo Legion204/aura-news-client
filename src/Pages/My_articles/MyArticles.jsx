@@ -11,6 +11,7 @@ const MyArticles = () => {
     const { firebaseUser } = useAuth();
     const axiosPublic = useAxiosPublic();
     const [articleData, setArticleData] = useState({});
+    const [reason, setReason] = useState();
 
     const { data: myArticles = [], refetch } = useQuery({
         queryKey: ['myArticles'],
@@ -98,7 +99,7 @@ const MyArticles = () => {
                                     <th>{index + 1}</th>
                                     <td>{myArticle?.articleTitle}</td>
                                     <td><DetailsBtn id={myArticle?._id}></DetailsBtn></td>
-                                    <td>{myArticle?.status}</td>
+                                    <td>{myArticle?.status === "declined" ? <button onClick={() => {document.getElementById('my_modal_2').showModal(),setReason(myArticle?.reason)}} className="btn bg-red-700 text-white">{myArticle?.status} , See Reason</button> : myArticle?.status}</td>
                                     <td>{myArticle?.isPremium && "Yes" || "No"}</td>
                                     <td><button onClick={() => { getArticleData(myArticle?._id), document.getElementById('my_modal_3').showModal() }} className="btn text-2xl bg-red-700 text-white"><MdEdit /></button></td>
                                     <td><button onClick={() => { handleDelete(myArticle?._id) }} className="btn text-2xl bg-red-700 text-white"><MdDelete /></button></td>
@@ -108,7 +109,15 @@ const MyArticles = () => {
                     </table>
                 </div>
             </div>
-            {/* Modal */}
+            {/* Modal-1 */}
+            <dialog id="my_modal_2" className="modal">
+                <div className="modal-box">
+                    <button onClick={() => { document.getElementById('my_modal_2').close() }} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    <h3 className="font-bold text-lg">Reason</h3>
+                    <p className="py-4">{reason}</p>
+                </div>
+            </dialog>
+            {/* Modal-2 */}
             <dialog id="my_modal_3" className="modal w-full">
                 <div className="modal-box w-full max-w-[80%]">
                     <button onClick={() => { document.getElementById('my_modal_3').close() }} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
