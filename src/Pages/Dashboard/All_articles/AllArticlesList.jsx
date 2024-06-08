@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const AllArticlesList = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { data: articles = [],refetch } = useQuery({
+    const { data: articles = [], refetch } = useQuery({
         queryKey: ['article', 'dashboard'],
         queryFn: async () => {
             const res = await axiosPublic.get("/articles/admin")
@@ -42,6 +42,37 @@ const AllArticlesList = () => {
         });
     };
 
+    const handleApproved = id => {
+        axiosPublic.patch(`/article/approve/${id}`)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Article approved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+    const handlePremium = id => {
+        axiosPublic.patch(`/article/premium/${id}`)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: " Made Article Premium Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -73,10 +104,10 @@ const AllArticlesList = () => {
                                 <td>{article?.publishDate}</td>
                                 <td>{article?.status}</td>
                                 <td>{article?.publication}</td>
-                                <td>{article?.status === "approved" && article?.status || <button className="btn text-xl bg-red-700 text-white"><FaCheck /></button>}</td>
+                                <td>{article?.status === "approved" && article?.status || <button onClick={() => { handleApproved(article?._id) }} className="btn text-xl bg-red-700 text-white"><FaCheck /></button>}</td>
                                 <td>{article?.status === "decline" && article?.status || <button className="btn text-xl bg-red-700 text-white"><ImCross /></button>}</td>
                                 <td><button onClick={() => { handleDelete(article?._id) }} className="btn text-xl bg-red-700 text-white"><FaTrashAlt /></button></td>
-                                <td>{article?.isPremium && "premium" || <button className="btn text-xl bg-red-700 text-white"><TbPremiumRights /></button>}</td>
+                                <td>{article?.isPremium && "premium" || <button onClick={() => { handlePremium(article?._id) }} className="btn text-xl bg-red-700 text-white"><TbPremiumRights /></button>}</td>
                             </tr>)
                         }
                     </tbody>
