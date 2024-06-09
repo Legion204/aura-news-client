@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import PremiumArticleCard from "../../Components/PremiumArticleCard";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 
 const PremiumArticle = () => {
 
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const { data: premiumArticles = [] } = useQuery({
         queryKey: ['premiumArticles'],
         queryFn: async () => {
-            const res = await axiosPublic.get("/premium_articles")
+            const res = await axiosSecure.get("/premium_articles")
             return res.data
         }
     });

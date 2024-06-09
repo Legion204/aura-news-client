@@ -1,16 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
 
 const NavBar = () => {
 
     const { firebaseUser, logOut } = useAuth();
+    const [isAdmin]=useAdmin();
 
     const navLinks = <div className=" flex flex-col lg:flex-row gap-5 text-xl font-Source">
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/'}><li className="hover:text-red-700">Home</li></NavLink>
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_article'}><li className="hover:text-red-700">Add Articles</li></NavLink>
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/all_articles"}><li className="hover:text-red-700">All Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/manage_my_foods'}><li className="hover:text-red-700">Subscription</li></NavLink>}
-        {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/dashboard/users"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
+        { isAdmin && <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/dashboard/users"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_articles"}><li className="hover:text-red-700">My Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/premium_articles"}><li className="hover:text-red-700">Premium Articles</li></NavLink>}
     </div>

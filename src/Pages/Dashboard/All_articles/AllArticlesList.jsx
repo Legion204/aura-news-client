@@ -5,15 +5,17 @@ import { ImCross } from "react-icons/im";
 import { TbPremiumRights } from "react-icons/tb";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllArticlesList = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const [articleData, setArticleData] = useState({});
 
     const { data: articles = [], refetch } = useQuery({
         queryKey: ['article', 'dashboard'],
         queryFn: async () => {
-            const res = await axiosPublic.get("/articles/admin")
+            const res = await axiosSecure.get("/articles/admin")
             return res.data
         }
     });

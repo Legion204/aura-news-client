@@ -7,9 +7,9 @@ import 'swiper/css/navigation';
 import './Slider.css'
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
-import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
 
 

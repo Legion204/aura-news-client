@@ -6,17 +6,19 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import DetailsBtn from "../../Components/DetailsBtn";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyArticles = () => {
     const { firebaseUser } = useAuth();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const [articleData, setArticleData] = useState({});
     const [reason, setReason] = useState();
 
     const { data: myArticles = [], refetch } = useQuery({
         queryKey: ['myArticles'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/my_articles?email=${firebaseUser?.email}`)
+            const res = await axiosSecure.get(`/my_articles?email=${firebaseUser?.email}`)
             return res.data
         }
     });
