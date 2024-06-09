@@ -4,6 +4,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
+import { useQuery } from "@tanstack/react-query";
 
 const image_hosting_key = import.meta.env.VITE_image_hosting_key
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -20,6 +21,15 @@ const AddArticle = () => {
         { value: 'science', label: 'science' },
         { value: 'health', label: 'health' },
     ];
+
+
+    const { data: publications = [] } = useQuery({
+        queryKey: ['publications'],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/publications")
+            return res.data
+        }
+    });
 
     const {
         register,
@@ -75,7 +85,7 @@ const AddArticle = () => {
                 });
             }
         }
-    }
+    };
 
     return (
         <div className=" p-10 lg:p-32 w-full">
@@ -127,8 +137,9 @@ const AddArticle = () => {
                         </div>
                         <select defaultValue={"default"} {...register("publication")} className="select select-bordered w-full max-w-xs">
                             <option disabled value={"default"}>select one</option>
-                            <option value={"BBC"}>BBC</option>
-                            <option value={"CNN"}>CNN</option>
+                            {
+                                publications?.map(publication => <option key={publication?._id} value={publication?.publication}>{publication?.publication}</option>)
+                            }
                         </select>
                     </label>
                 </div>
