@@ -5,7 +5,6 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SectionTitle from "../../shared/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_image_hosting_key
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -13,7 +12,6 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddArticle = () => {
 
     const axiosPublic = useAxiosPublic();
-    const axiosSecure = useAxiosSecure();
     const { firebaseUser } = useAuth();
 
     const options = [
@@ -28,7 +26,7 @@ const AddArticle = () => {
     const { data: publications = [] } = useQuery({
         queryKey: ['publications'],
         queryFn: async () => {
-            const res = await axiosSecure.get("/publications")
+            const res = await axiosPublic.get("/publications")
             return res.data
         }
     });

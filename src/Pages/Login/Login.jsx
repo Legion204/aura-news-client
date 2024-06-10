@@ -3,7 +3,8 @@ import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-
+import loginAnimation from '../../assets/loginAnimation.json'
+import Lottie from "lottie-react";
 
 const Login = () => {
 
@@ -53,12 +54,12 @@ const Login = () => {
     }
 
     return (
-        <div className="flex bg-black">
-            <div className="w-1/2">
-
+        <div className="lg:flex bg-black">
+            <div className="lg:w-1/2 grid">
+                <Lottie className="w-[70%] self-center justify-self-center" animationData={loginAnimation} loop={true} />
             </div>
-            <div className="w-1/2">
-                <div className="w-full max-w-md p-8 space-y-3 rounded-xl">
+            <div className="lg:w-1/2 grid">
+                <div className="w-full max-w-md p-8 space-y-3 rounded-xl self-center justify-self-center">
                     <h1 className="text-2xl font-bold text-center text-white">Login</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                         <div className="space-y-1 text-sm">

@@ -13,10 +13,13 @@ import Dashboard from "../Layout/Dashboard";
 import Users from "../Pages/Dashboard/Users/Users";
 import AllArticlesList from "../Pages/Dashboard/All_articles/AllArticlesList";
 import AddPublications from "../Pages/Dashboard/Add_publications/AddPublications";
+import AdminRoute from "./AdminRoute";
+import ErrorPage from "../shared/Error/ErrorPage";
 
 const router = createBrowserRouter([
     {
       path: "/",
+      errorElement:<ErrorPage></ErrorPage>,
       element: <Root></Root>,
       children:[
         {
@@ -55,19 +58,19 @@ const router = createBrowserRouter([
     },
     {
       path:"dashboard",
-      element:<Dashboard></Dashboard>,
+      element:<AdminRoute><Dashboard></Dashboard></AdminRoute>,
       children:[
         {
           path:"users",
-          element:<Users></Users>
+          element:<AdminRoute><Users></Users></AdminRoute>
         },
         {
           path:"all_articles",
-          element:<AllArticlesList></AllArticlesList>
+          element:<AdminRoute><AllArticlesList></AllArticlesList></AdminRoute>
         },
         {
           path:"add_publications",
-          element:<AddPublications></AddPublications>
+          element:<AdminRoute><AddPublications></AddPublications></AdminRoute>
         }
       ]
     }

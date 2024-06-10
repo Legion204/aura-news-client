@@ -38,14 +38,13 @@ const AuthProvider = ({ children }) => {
     const logOut = () => {
         setLoading(true);
         return signOut(auth)
-    }
+    };
 
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setFirebaseUser(currentUser);
             if (currentUser) {
-                // get token and store client
                 const userInfo = { email: currentUser.email };
                 axiosPublic.post('/jwt', userInfo)
                     .then(res => {
@@ -56,7 +55,6 @@ const AuthProvider = ({ children }) => {
                     })
             }
             else {
-                // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
                 localStorage.removeItem('access-token');
                 setLoading(false);
             }
@@ -67,7 +65,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [axiosPublic]);
 
-    const data = { firebaseUser, loading, auth, createUser, signIn, signInGoogle, logOut }
+    const data = { logOut, firebaseUser, loading, auth, createUser, signIn, signInGoogle }
     return (
         <AuthContext.Provider value={data}>
             {children}

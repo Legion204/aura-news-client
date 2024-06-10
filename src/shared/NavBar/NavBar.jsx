@@ -1,18 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
+import logo from '../../assets/auraNewsLogo.png'
 
 const NavBar = () => {
-
+    const [isAdmin] = useAdmin();
     const { firebaseUser, logOut } = useAuth();
-    const [isAdmin]=useAdmin();
+    console.log(isAdmin);
 
     const navLinks = <div className=" flex flex-col lg:flex-row gap-5 text-xl font-Source">
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/'}><li className="hover:text-red-700">Home</li></NavLink>
         <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/add_article'}><li className="hover:text-red-700">Add Articles</li></NavLink>
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/all_articles"}><li className="hover:text-red-700">All Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={'/manage_my_foods'}><li className="hover:text-red-700">Subscription</li></NavLink>}
-        { isAdmin && <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/dashboard/users"}><li className="hover:text-red-700">Dashboard</li></NavLink>}
+        {isAdmin ? <NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/dashboard/users"}><li className="hover:text-red-700">Dashboard</li></NavLink> : ''}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/my_articles"}><li className="hover:text-red-700">My Articles</li></NavLink>}
         {<NavLink className={({ isActive }) => isActive ? 'text-red-700' : ''} to={"/premium_articles"}><li className="hover:text-red-700">Premium Articles</li></NavLink>}
     </div>
@@ -29,7 +30,7 @@ const NavBar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Aura NEWS</a>
+                <Link to={"/"} className="w-40"><img src={logo} alt="" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
