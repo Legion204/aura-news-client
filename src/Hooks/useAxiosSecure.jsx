@@ -3,7 +3,7 @@ import axios from "axios";
 // import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: import.meta.env.VITE_api_url
 })
 const useAxiosSecure = () => {
     // const { logOut } = useAuth();
@@ -29,7 +29,7 @@ const useAxiosSecure = () => {
         console.log(status);
         if (status === 401 || status === 403) {
             // await logOut();
-            // navigate("/login")
+            // navigate("/login");
         }
         return Promise.reject(error)
     })
