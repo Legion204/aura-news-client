@@ -8,6 +8,7 @@ const useAdmin = () => {
     const { firebaseUser } = useAuth();
     const { data: isAdmin, isPending: isAdminLoading } = useQuery({
         queryKey: [firebaseUser?.email, 'isAdmin'],
+        enabled:!!firebaseUser?.email && !!localStorage.getItem("access-token"),
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/admin?email=${firebaseUser.email}`);
             return res.data?.admin;

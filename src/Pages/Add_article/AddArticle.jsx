@@ -38,7 +38,7 @@ const AddArticle = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
         // upload image
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {

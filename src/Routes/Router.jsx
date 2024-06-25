@@ -15,6 +15,7 @@ import AllArticlesList from "../Pages/Dashboard/All_articles/AllArticlesList";
 import AddPublications from "../Pages/Dashboard/Add_publications/AddPublications";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "../shared/Error/ErrorPage";
+import Subscription from "../Pages/Subscriptioption/Subscription";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         {
           path:"/my_articles",
           element:<PrivateRoute><MyArticles></MyArticles></PrivateRoute>
+        },
+        {
+          path:"/subscription",
+          element:<Subscription></Subscription>
         }
       ]
     },

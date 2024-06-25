@@ -89,7 +89,7 @@ const AllArticlesList = () => {
         const form = e.target;
         const reason = form.reason.value
         const declineReason = { reason }
-        console.log(declineReason, articleData);
+        // console.log(declineReason, articleData);
         axiosPublic.patch(`/article/decline/${articleData?._id}`, declineReason)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
