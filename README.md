@@ -68,3 +68,10 @@ Features and characteristics of this website:
   - react hook form
   - Axios
   - Tanstak query
+
+ - # To run the project locally
+    - copy this git repo and server side repo  
+    - open terminal in vs-code  
+    - type npm run dev to run client side website  
+    - open server side file in vs-code  
+    - open terminal and type nodemon index.js to run the server. (Note: "If nodemon is not istall in your device install it")  
