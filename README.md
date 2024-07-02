@@ -1,5 +1,7 @@
 # Aura NEWS
 
+Aura news is a modern, responsive news website built with React. It delivers up-to-date news articles across various categories, including politics, technology, sports, entertainment, and more. With a clean and intuitive design, NewsHub provides users with an engaging and seamless reading experience. Features include dynamic content loading, real-time updates, and personalized news feeds based on user preferences.
+
 Live Link: https://aura-news-d0504.web.app/
 
 Server-side github repo Link: https://github.com/Legion204/aura-news-server
