@@ -1,6 +1,7 @@
 # Aura NEWS
 
 Live Link: https://aura-news-d0504.web.app/
+Server-side github repo Link: https://github.com/Legion204/aura-news-server
 
 Features and characteristics of this website:
 
